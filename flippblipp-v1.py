@@ -1,2 +1,2 @@
 #input desired n
-int n = input(Choose a length of the game: )
+n = input("Choose a length of the game: ")
