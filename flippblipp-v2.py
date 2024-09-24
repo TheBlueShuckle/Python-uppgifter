@@ -7,18 +7,21 @@ def isDivisibleByThree(number):
 def isDivisibleByFive(number):
     return number % 5 == 0
 
+def flippblipp (n):
+    
+        xPlus = x + 1
+        output = ""
+
+        if (isDivisibleByThree(xPlus)):
+            output += ("flipp ")  
+
+        if (isDivisibleByFive(xPlus)):
+            output += ("blipp")
+        
+        if output == "":
+            output += (str(xPlus))
+
+        return str(output)
 
 for x in range(n):
-    number = x + 1
-    
-    if (isDivisibleByThree(number) and isDivisibleByFive(number)):
-        print("flipp blipp")
-        
-    elif (isDivisibleByFive(number)):
-        print("blipp")
-        
-    elif (isDivisibleByThree(number)):
-        print("flipp")
-    
-    else:
-        print(number)
+    print(flippblipp(x))
