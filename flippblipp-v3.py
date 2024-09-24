@@ -24,7 +24,7 @@ def flippblipp(number):
 
 x = 1
 
-print(x)
+print("      ", x)
 
 while(True):
      x += 1
