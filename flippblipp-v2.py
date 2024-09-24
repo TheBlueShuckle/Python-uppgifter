@@ -9,17 +9,17 @@ def isDivisibleByFive(number):
 
 def flippblipp (n):
     
-        xPlus = x + 1
+        nPlus = n + 1
         output = ""
 
-        if (isDivisibleByThree(xPlus)):
+        if (isDivisibleByThree(nPlus)):
             output += ("flipp ")  
 
-        if (isDivisibleByFive(xPlus)):
+        if (isDivisibleByFive(nPlus)):
             output += ("blipp")
         
         if output == "":
-            output += (str(xPlus))
+            output += (str(nPlus))
 
         return str(output)
 
