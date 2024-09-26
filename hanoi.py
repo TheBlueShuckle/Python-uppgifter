@@ -4,9 +4,16 @@ B = []
 C = []
 
 def hanoi(n, src, dest, aux):
+    if (len(src) == 0 and len(aux) == 0):
+        return
+
     move(src, aux)
-    move(src, dest)
+
+    if (len(dest) == 0):
+        move(src, dest)
+
     move(aux, dest)
+
     hanoi(n, A, B, C)
 
 def move(src, dest):
@@ -23,4 +30,4 @@ def render(peg_a, peg_b, peg_c):
 
 render(A, B, C)
 
-hanoi(2, A, B, C)
+hanoi(3, A, B, C)
