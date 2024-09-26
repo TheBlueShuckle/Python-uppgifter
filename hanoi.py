@@ -8,18 +8,18 @@ def hanoi(n, src, dest, aux):
         return
 
     move(src, aux)
-
-    if (len(dest) != 0):
-        hanoi(len(dest)-1, dest, src, aux)
-
+    move(src, dest)
     move(aux, dest)
+
+    if (len(dest) == 0):
+        hanoi()
 
     hanoi(n, A, B, C)
 
 def move(src, dest):
-    temp = src[len(src)-1]
+    movedPiece = src[len(src)-1]
     src.pop(len(src)-1)
-    dest.append(temp)
+    dest.append(movedPiece)
     render(A, B, C)
 
 def render(peg_a, peg_b, peg_c):
@@ -30,4 +30,4 @@ def render(peg_a, peg_b, peg_c):
 
 render(A, B, C)
 
-hanoi(3, A, B, C)
+hanoi(len(A), A, B, C)
