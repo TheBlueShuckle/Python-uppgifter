@@ -9,8 +9,8 @@ def hanoi(n, src, dest, aux):
 
     move(src, aux)
 
-    if (len(dest) == 0):
-        move(src, dest)
+    if (len(dest) != 0):
+        hanoi(len(dest)-1, dest, src, aux)
 
     move(aux, dest)
 
