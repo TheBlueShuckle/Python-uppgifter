@@ -61,9 +61,22 @@ def createPegA(n):
     for i in range(n):
         A.insert(0, i+1)
 
+def reset():
+    global turn
+    global A
+    global B
+    global C
+    global last_move
+
+    turn = 0
+    A = []
+    B = []
+    C = []
+    last_move = ""
+
 while True:
     createPegA(int(input("Input number of plates: ")))
 
     render(A, B, C)
     hanoi(len(A), A, B, C)
-    turn = 0
+    reset()
