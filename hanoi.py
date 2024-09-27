@@ -4,18 +4,17 @@ B = []
 C = []
 
 def hanoi(n, src, dest, aux):
-    if (len(src) == 0 and len(aux) == 0):
-        return
+    if src[len(src) - 1] != n:
+        hanoi(n-1, src, aux, dest)
 
-    move(src, aux)
     move(src, dest)
-    move(aux, dest)
 
-    if (len(dest) == 0):
-        hanoi()
+    if aux != [] and (aux[len(aux) - 1] < n):
+        hanoi(n-1, aux, dest, src)
 
-    hanoi(n, A, B, C)
-
+    if n in dest:
+        return
+    
 def move(src, dest):
     movedPiece = src[len(src)-1]
     src.pop(len(src)-1)
