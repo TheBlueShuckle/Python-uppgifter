@@ -6,24 +6,35 @@ turn = 0
 last_move = ""
 
 def hanoi(n, src, dest, aux):
+    # If the top disc on the source peg is not n
+    #    Run hanoi with n-1 discs and change destination to aux and use dest as aux
     if src[len(src) - 1] != n:
         hanoi(n-1, src, aux, dest)
 
+    # Move disc n to destination
     move(src, dest)
 
+    # If aux is not empty and the top disc on aux is less than n
+    #    Run hanoi with n-1 discs and use aux as destination and src as aux
     if aux != [] and (aux[len(aux) - 1] < n):
         hanoi(n-1, aux, dest, src)
 
+    # If the n'th disc is in its destination, return
     if n in dest:
         return
     
 def move(src, dest):
     global turn
     global last_move
-    turn += 1
+    
+    # Get disc to move
+    # Remove the disc from src
+    # Add the disc to dest
     moved_disc = src[len(src)-1]
     src.pop(len(src)-1)
     dest.append(moved_disc)
+    
+    turn += 1
     last_move = "Moved disc " + str(moved_disc) + " from " + getPegName(src) + " to " + getPegName(dest)
     render(A, B, C)
 
@@ -55,3 +66,4 @@ while True:
 
     render(A, B, C)
     hanoi(len(A), A, B, C)
+    turn = 0
