@@ -29,7 +29,6 @@ def is_closed(target):
     return target == CLOSED
 
 def close_target(targets, position):
-<<<<<<< Updated upstream
     targets[position] = CLOSED
 
 def shoot(position):
@@ -41,8 +40,6 @@ def shoot(position):
 
 def get_hit():
      return(random.randint(0, 100) > 50)
-=======
-    targets[position] = closed
 
 def render(targets):
     print('1 2 3 4 5')
@@ -53,4 +50,3 @@ def render(targets):
         else:
             targets_string = targets_string + '● '
     print(targets_string)
->>>>>>> Stashed changes
