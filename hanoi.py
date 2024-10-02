@@ -8,6 +8,8 @@ last_move = ""
 def hanoi(n, src, dest, aux):
     # If the top disc on the source peg is not n
     #    Run hanoi with n-1 discs and change destination to aux and use dest as aux
+    
+    # Purpose of this is to clear the path for the n'th disc to move to dest
     if src[len(src) - 1] != n:
         hanoi(n-1, src, aux, dest)
 
@@ -16,6 +18,8 @@ def hanoi(n, src, dest, aux):
 
     # If aux is not empty and the top disc on aux is less than n
     #    Run hanoi with n-1 discs and use aux as destination and src as aux
+
+    # Purpose of this is to move all the discs to the destination
     if aux != [] and (aux[len(aux) - 1] < n):
         hanoi(n-1, aux, dest, src)
 
