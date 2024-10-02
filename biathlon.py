@@ -6,6 +6,7 @@ OPEN = 0
 CLOSED = 1
 
 targets = []
+turn = 1
 
 
 def splash():
@@ -33,7 +34,7 @@ def close_target(targets, position):
 
 def shoot(position):
     if is_open(targets[position]) and get_hit():
-        close_target[targets[position]]
+        close_target(targets, position)
         return True
     
     return False
@@ -50,3 +51,24 @@ def render(targets):
         else:
             targets_string = targets_string + '● '
     print(targets_string)
+
+targets = new_targets()
+
+while True:
+    render(targets)
+
+    target_position = int(input("Shot nr " + str(turn) + " at: "))
+
+    if not (target_position > 5) and not (target_position < 1):
+        hit = shoot(target_position - 1)
+
+        if (hit):
+            print("Hit on target " + str(target_position))
+
+        else:
+            print("Miss")
+
+        turn += 1
+
+    else:
+        print("Wrong input. Redoing.")
