@@ -1,4 +1,3 @@
-#input desired n
 n = int(input("Choose a length of the game: "))
 
 def isDivisibleByThree(number):

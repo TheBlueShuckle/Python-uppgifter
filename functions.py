@@ -14,6 +14,7 @@ def quadruple(n):
 def funky(n, m):
     return triple(n) + quadruple(m)
 
+# Tests
 a = 3
 b = 14
 
