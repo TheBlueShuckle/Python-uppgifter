@@ -1,6 +1,11 @@
+
+import random
+
 # Variables
-open = 0
-closed = 1
+OPEN = 0
+CLOSED = 1
+
+targets = []
 
 
 def splash():
@@ -9,20 +14,29 @@ def splash():
     print('           a hit or miss game         ')
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     
-def is_open(goal):
-    # returnerar True om goal == open (0), annars False
-    return goal == open
-
-def is_closed(goal):
-    # returnerar True om goal == closed (1), annars False
-    return goal == closed
-
 def new_targets():
-    ts = []
+    targets = []
     for _ in range(5):
-        ts.append(open)
-    return ts
+        targets.append(OPEN)
+    return targets
+
+def is_open(target):
+    # returnerar True om goal == open (0), annars False
+    return target == OPEN
+
+def is_closed(target):
+    # returnerar True om goal == closed (1), annars False
+    return target == CLOSED
 
 def close_target(targets, position):
-    targets[postition] = closed
+    targets[position] = CLOSED
 
+def shoot(position):
+    if is_open(targets[position]) and get_hit():
+        close_target[targets[position]]
+        return True
+    
+    return False
+
+def get_hit():
+     return(random.randint(0, 100) > 50)
