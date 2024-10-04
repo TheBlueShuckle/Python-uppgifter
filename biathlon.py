@@ -1,13 +1,15 @@
 
 import random
+from enum import Enum
 
 # Variables
 OPEN = 0
 CLOSED = 1
 
+Outcome = Enum('Outcome', ['MISS', 'HIT_OPEN', 'HIT_CLOSED'])
+
 targets = []
 turn = 1
-
 
 def splash():
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -17,7 +19,7 @@ def splash():
     
 def new_targets():
     targets = []
-    for _ in range(5):
+    for i in range(5):
         targets.append(OPEN)
     return targets
 
@@ -33,11 +35,14 @@ def close_target(targets, position):
     targets[position] = CLOSED
 
 def shoot(position):
-    if is_open(targets[position]) and get_hit():
+    if get_hit():
+        if (is_closed(targets[position])):
+            return 2
+        
         close_target(targets, position)
-        return True
+        return 1
     
-    return False
+    return 0
 
 def get_hit():
      return(random.randint(0, 100) > 50)
@@ -57,18 +62,27 @@ targets = new_targets()
 while True:
     render(targets)
 
+    if (turn > 5):
+        break
+
     target_position = int(input("Shot nr " + str(turn) + " at: "))
 
     if not (target_position > 5) and not (target_position < 1):
         hit = shoot(target_position - 1)
 
-        if (hit):
-            print("Hit on target " + str(target_position))
+        match hit:
+            case Outcome.MISS:
+                print('Miss')
 
-        else:
-            print("Miss")
+            case Outcome.HIT_OPEN:
+                print("Hit on target " + str(target_position))
+
+            case Outcome.HIT_CLOSED:
+                print('Hit on closed target ' + str(target_position))
 
         turn += 1
 
     else:
         print("Wrong input. Redoing.")
+
+print('You hit ' + str(targets.count(CLOSED)) + ' out of 5 targets.')
