@@ -37,12 +37,12 @@ def close_target(targets, position):
 def shoot(position):
     if get_hit():
         if (is_closed(targets[position])):
-            return 2
+            return Outcome.HIT_CLOSED
         
         close_target(targets, position)
-        return 1
+        return Outcome.HIT_OPEN
     
-    return 0
+    return Outcome.MISS
 
 def get_hit():
      return(random.randint(0, 100) > 50)
