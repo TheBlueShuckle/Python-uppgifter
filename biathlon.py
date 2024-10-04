@@ -8,8 +8,8 @@ CLOSED = 1
 
 Outcome = Enum('Outcome', ['MISS', 'HIT_OPEN', 'HIT_CLOSED'])
 
-targets = []
-turn = 1
+players_targets = []
+player_turns = []
 
 def splash():
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -34,12 +34,12 @@ def is_closed(target):
 def close_target(targets, position):
     targets[position] = CLOSED
 
-def shoot(position):
+def shoot(player, position):
     if get_hit():
-        if (is_closed(targets[position])):
+        if (is_closed(players_targets[player][position])):
             return Outcome.HIT_CLOSED
         
-        close_target(targets, position)
+        close_target(players_targets[player], position)
         return Outcome.HIT_OPEN
     
     return Outcome.MISS
@@ -47,42 +47,49 @@ def shoot(position):
 def get_hit():
      return(random.randint(0, 100) > 50)
 
-def render(targets):
+def render(player_index):
+    print('Player ' + str(player_index + 1) + '\'s turn')
     print('1 2 3 4 5')
     targets_string = ''
-    for n in range(len(targets)):
-        if is_open(targets[n]):
+    for n in range(len(players_targets[player_index])):
+        if is_open(players_targets[player_index][n]):
             targets_string = targets_string + '○ '
         else:
             targets_string = targets_string + '● '
     print(targets_string)
 
-targets = new_targets()
+
+splash()
+
+for player in range(int(input('How many players are there?: '))):
+    players_targets.append(new_targets())
+    player_turns.append(1)
 
 while True:
-    render(targets)
+    for player in range(len(players_targets)):
+        render(player)
+        if (player_turns[player] > 5):
+            break
 
-    if (turn > 5):
-        break
+        target_position = int(input("Shot nr " + str(player_turns[player]) + " at: "))
 
-    target_position = int(input("Shot nr " + str(turn) + " at: "))
+        if not (target_position > 5) and not (target_position < 1):
+            hit = shoot(player, target_position - 1)
 
-    if not (target_position > 5) and not (target_position < 1):
-        hit = shoot(target_position - 1)
+            match hit:
+                case Outcome.MISS:
+                    print('Miss')
 
-        match hit:
-            case Outcome.MISS:
-                print('Miss')
+                case Outcome.HIT_OPEN:
+                    print("Hit on target " + str(target_position))
 
-            case Outcome.HIT_OPEN:
-                print("Hit on target " + str(target_position))
+                case Outcome.HIT_CLOSED:
+                    print('Hit on closed target ' + str(target_position))
 
-            case Outcome.HIT_CLOSED:
-                print('Hit on closed target ' + str(target_position))
+            player_turns[player] += 1
 
-        turn += 1
+        else:
+            print("Wrong input. Redoing.")
 
-    else:
-        print("Wrong input. Redoing.")
 
-print('You hit ' + str(targets.count(CLOSED)) + ' out of 5 targets.')
+print('Jobs done')
