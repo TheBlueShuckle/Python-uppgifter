@@ -48,6 +48,7 @@ def get_hit():
      return(random.randint(0, 100) > 50)
 
 def render(player_index):
+    print('---')
     print('Player ' + str(player_index + 1) + '\'s turn')
     print('1 2 3 4 5')
     targets_string = ''
@@ -65,7 +66,7 @@ for player in range(int(input('How many players are there?: '))):
     players_targets.append(new_targets())
     player_turns.append(1)
 
-while True:
+for i in range(5):
     for player in range(len(players_targets)):
         render(player)
         if (player_turns[player] > 5):
