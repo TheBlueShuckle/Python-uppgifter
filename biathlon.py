@@ -16,7 +16,8 @@ def splash():
     print('                Biathlon              \n')
     print('           a hit or miss game         ')
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-    
+
+#   Targets
 def new_targets():
     targets = []
     for i in range(5):
@@ -24,16 +25,15 @@ def new_targets():
     return targets
 
 def is_open(target):
-    # returnerar True om goal == open (0), annars False
     return target == OPEN
 
 def is_closed(target):
-    # returnerar True om goal == closed (1), annars False
     return target == CLOSED
 
 def close_target(targets, position):
     targets[position] = CLOSED
 
+#   Shooting
 def shoot(player, position):
     if get_hit():
         if (is_closed(players_targets[player][position])):
@@ -47,6 +47,7 @@ def shoot(player, position):
 def get_hit():
      return(random.randint(0, 100) > 50)
 
+#   UI
 def render(player_index):
     print('---')
     print('Player ' + str(player_index + 1) + '\'s turn')
@@ -59,38 +60,43 @@ def render(player_index):
             targets_string = targets_string + '● '
     print(targets_string)
 
+#   Start game
+def init_players(total_players):
+    for player in range(total_players):
+        players_targets.append(new_targets())
+        player_turns.append(1)
+
 
 splash()
-
-for player in range(int(input('How many players are there?: '))):
-    players_targets.append(new_targets())
-    player_turns.append(1)
+init_players(int(input('How many players are there?: ')))
 
 for i in range(5):
     for player in range(len(players_targets)):
-        render(player)
-        if (player_turns[player] > 5):
-            break
+        shot_counted = False    # shot_counted is used for handling wrong inputs
 
-        target_position = int(input("Shot nr " + str(player_turns[player]) + " at: "))
+        while not shot_counted:
+            render(player)
 
-        if not (target_position > 5) and not (target_position < 1):
-            hit = shoot(player, target_position - 1)
+            target_position = int(input("Shot nr " + str(player_turns[player]) + " at: "))
 
-            match hit:
-                case Outcome.MISS:
-                    print('Miss')
+            if not (target_position > 5) and not (target_position < 1):     # If inputed number is between 1 and 5
+                outcome = shoot(player, target_position - 1)
 
-                case Outcome.HIT_OPEN:
-                    print("Hit on target " + str(target_position))
+                match outcome:
+                    case Outcome.MISS:
+                        print('Miss')
 
-                case Outcome.HIT_CLOSED:
-                    print('Hit on closed target ' + str(target_position))
+                    case Outcome.HIT_OPEN:
+                        print("Hit on target " + str(target_position))
 
-            player_turns[player] += 1
+                    case Outcome.HIT_CLOSED:
+                        print('Hit on closed target ' + str(target_position))
 
-        else:
-            print("Wrong input. Redoing.")
+                player_turns[player] += 1
+                shot_counted = True
+
+            else:
+                print("Wrong input. Redoing turn.")
 
 
 print('Jobs done')
