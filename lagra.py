@@ -28,14 +28,18 @@ def save_user_info(username, user_items):
     user_file = open(path, 'w')
 
     for item in user_items:
-        if (not user_items[len[user_items] - 1] == item):
+        if (not user_items[len(user_items) - 1] == item):
             user_file.write(item + "\n")
         
         else:
             user_file.write(item)
 
+def sign_in(username):
+    global user_items
+    user_items = fetch_items(username)
 
 def sign_out(username):
+    global user_items
     save_user_info(username, user_items)
     user_items = []
 
@@ -74,7 +78,7 @@ def ui_index():
     while True:
         print('Welcome to Lagra (TM)')
         print('\nl) Log in')
-        print('q) Quit\n')
+        print('q) Quit')
         option = input_loop(['l', 'q'])
         match option:
             case 'l':
@@ -90,6 +94,7 @@ def ui_login():
         login_ok = check_login(username, password)
         match login_ok:
             case True:
+                sign_in(username)
                 ui_user(username)
                 break
             case False:
@@ -115,7 +120,7 @@ def ui_user(user):
         option = input_loop(['a', 'l', 'q'])
         match option:
             case 'a':
-                ui_add_item()
+                ui_add_item(user)
             case 'l':
                 ui_list_items(user)
             case 'q':
@@ -123,13 +128,13 @@ def ui_user(user):
                 break
 
 def ui_list_items(user):
-    items = fetch_items(user)
-    for n in items:
-        print("" + ') ' + n)
+    global user_items
+    for n in user_items:
+        print(str(user_items.index(n) + 1) + ') ' + n)
 
-def ui_add_item():
+def ui_add_item(user):
     item = input('Add item: ')
     add_item(item)
-    save_user_info()
+    save_user_info(user, user_items)
 
 ui_index()
