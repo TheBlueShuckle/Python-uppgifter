@@ -5,7 +5,16 @@ users = {
     "FooBar" : "Baz" 
 }
 
-user_items = ["Pen", "Laptop", "Eraser"]
+user_items = []
+
+def check_login(username, password):
+    if(len(users) == 0):
+        return False
+
+    if (users.get(username) == password):
+        return True
+    
+    return False
 
 def save_user_info(username, user_items):
     path = 'usrs/' + username
@@ -19,8 +28,27 @@ def save_user_info(username, user_items):
     user_file = open(path, 'w')
 
     for item in user_items:
-        user_file.write(item + "\n")
+        if (not user_items[len[user_items] - 1] == item):
+            user_file.write(item + "\n")
+        
+        else:
+            user_file.write(item)
 
+
+def add_item(item):
+    user_items.append(item)
+
+def fetch_items(username):
+    path = 'usrs/' + username
+    fileExists = os.path.exists(path)
+
+    if (not fileExists):
+        return []
+    
+    user_file = open(path, "r")
+    user_inventory = user_file.read()
+
+    return user_inventory.split("\n")
 
 def check_login(username, password):
     if(len(users) == 0):
