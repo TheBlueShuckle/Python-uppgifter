@@ -72,7 +72,7 @@ def ui_login():
 
 def ui_user(user):
     print('Welcome' + user)
-    list_items()
+    list_items(user)
 
     while True:
         print('Select an action')
@@ -84,6 +84,11 @@ def ui_user(user):
             case 'a':
                 add_item()
             case 'l':
-                list_items()
+                list_items(user)
             case 'q':
                 break
+
+def list_items(user):
+    items = fetch_items(user)
+    for n in items:
+        print(n + ') ' + items[n])
