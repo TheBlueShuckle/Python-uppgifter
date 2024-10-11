@@ -50,6 +50,15 @@ def fetch_items(username):
 
     return user_inventory.split("\n")
 
+def check_login(username, password):
+    if(len(users) == 0):
+        return False
+
+    if (users.get(username) == password):
+        return True
+    
+    return False
+
 def input_loop(options):
     # options is a list of strings
     i = ''
