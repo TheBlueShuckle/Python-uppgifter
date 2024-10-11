@@ -125,9 +125,11 @@ def ui_user(user):
 def ui_list_items(user):
     items = fetch_items(user)
     for n in items:
-        print(n + ') ' + items[n])
+        print("" + ') ' + n)
 
 def ui_add_item():
     item = input('Add item: ')
     add_item(item)
     save_user_info()
+
+ui_index()
