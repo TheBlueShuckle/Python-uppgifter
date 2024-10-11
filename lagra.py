@@ -5,7 +5,16 @@ users = {
     "FooBar" : "Baz" 
 }
 
-user_items = ["Pen", "Laptop", "Eraser"]
+user_items = []
+
+def check_login(username, password):
+    if(len(users) == 0):
+        return False
+
+    if (users.get(username) == password):
+        return True
+    
+    return False
 
 def save_user_info(username, user_items):
     path = 'usrs/' + username
@@ -19,30 +28,27 @@ def save_user_info(username, user_items):
     user_file = open(path, 'w')
 
     for item in user_items:
-        user_file.write(item + "\n")
+        if (not user_items[len[user_items] - 1] == item):
+            user_file.write(item + "\n")
+        
+        else:
+            user_file.write(item)
 
 
-# def check_login(username, password):
-#     if(len(users) == 0):
-#         return False
+def add_item(item):
+    user_items.append(item)
 
-#     if (users.get(username) == password):
-#         return True
+def fetch_items(username):
+    path = 'usrs/' + username
+    fileExists = os.path.exists(path)
+
+    if (not fileExists):
+        return []
     
-#     return False
+    user_file = open(path, "r")
+    user_inventory = user_file.read()
 
-# # test - delete later
-# username = input("Input Username: ")
-# password = input("Input Password: ")
-
-# if (check_login(username, password)):
-#     print("Logging in")
-
-# else:
-#     print("Incorrect username or password")
-
-# save_user_info("Foo", user_items)
-# save_user_info("FooBar", user_items)
+    return user_inventory.split("\n")
 
 def input_loop(options):
     # options is a list of strings
