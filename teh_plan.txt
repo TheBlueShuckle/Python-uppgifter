@@ -1,2 +1,10 @@
 usersystem
-    
+    login
+    lagra användar-info
+        en fil för användare och lösenord
+lagring
+    permissions
+    listor
+        lägga till
+        ta bort
+    en fil för varje användare
