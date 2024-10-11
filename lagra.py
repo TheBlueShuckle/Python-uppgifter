@@ -35,6 +35,10 @@ def save_user_info(username, user_items):
             user_file.write(item)
 
 
+def sign_out(username):
+    save_user_info(username, user_items)
+    user_items = []
+
 def add_item(item):
     user_items.append(item)
 
@@ -67,15 +71,16 @@ def input_loop(options):
     return i
 
 def ui_index():
-    print('Welcome to Lagra (TM)')
-    print('\nl) Log in')
-    print('q) Quit')
-    option = input_loop(['l', 'q'])
-    match option:
-        case 'l':
-            ui_login()
-        case 'q':
-            pass
+    while True:
+        print('Welcome to Lagra (TM)')
+        print('\nl) Log in')
+        print('q) Quit\n')
+        option = input_loop(['l', 'q'])
+        match option:
+            case 'l':
+                ui_login()
+            case 'q':
+                break
     print('Thank you for using Lagra (TM)!')
 
 def ui_login():
@@ -114,6 +119,7 @@ def ui_user(user):
             case 'l':
                 ui_list_items(user)
             case 'q':
+                sign_out(user)
                 break
 
 def ui_list_items(user):
