@@ -5,7 +5,16 @@ users = {
     "FooBar" : "Baz" 
 }
 
-user_items = ["Pen", "Laptop", "Eraser"]
+user_items = []
+
+def check_login(username, password):
+    if(len(users) == 0):
+        return False
+
+    if (users.get(username) == password):
+        return True
+    
+    return False
 
 def save_user_info(username, user_items):
     path = 'usrs/' + username
@@ -19,11 +28,31 @@ def save_user_info(username, user_items):
     user_file = open(path, 'w')
 
     for item in user_items:
-        user_file.write(item + "\n")
+        if (not user_items[len[user_items] - 1] == item):
+            user_file.write(item + "\n")
+        
+        else:
+            user_file.write(item)
+
 
 def sign_out(username):
     save_user_info(username, user_items)
     user_items = []
+
+def add_item(item):
+    user_items.append(item)
+
+def fetch_items(username):
+    path = 'usrs/' + username
+    fileExists = os.path.exists(path)
+
+    if (not fileExists):
+        return []
+    
+    user_file = open(path, "r")
+    user_inventory = user_file.read()
+
+    return user_inventory.split("\n")
 
 def check_login(username, password):
     if(len(users) == 0):
@@ -38,7 +67,7 @@ def input_loop(options):
     # options is a list of strings
     i = ''
     while i not in options:
-        i = input('Option: ')
+        i = input('\nOption: ')
     return i
 
 def ui_index():
@@ -56,17 +85,17 @@ def ui_index():
 
 def ui_login():
     while True:
-        username = input('    User: ')
+        username = input('\n    User: ')
         password = input('Password: ')
         login_ok = check_login(username, password)
         match login_ok:
             case True:
-                print('temp')
-                # Switch to logged in user
+                ui_user(username)
+                break
             case False:
                 print('Invalid username or password')
                 print('\nr) Try again')
-                print('q) Quit\n')
+                print('q) Quit')
                 option = input_loop(['r', 'q'])
                 match option:
                     case 'r':
@@ -75,20 +104,30 @@ def ui_login():
                         break
 
 def ui_user(user):
-    print('Welcome' + user)
-    list_items()
+    print('\nWelcome ' + user)
+    #ui_list_items(user)
 
     while True:
-        print('Select an action')
-        print('\na) Add item')
+        print('\nSelect an action')
+        print('a) Add item')
         print('l) List items')
         print('q) Log out')
         option = input_loop(['a', 'l', 'q'])
         match option:
             case 'a':
-                add_item()
+                ui_add_item()
             case 'l':
-                list_items()
+                ui_list_items(user)
             case 'q':
                 sign_out(user)
                 break
+
+def ui_list_items(user):
+    items = fetch_items(user)
+    for n in items:
+        print(n + ') ' + items[n])
+
+def ui_add_item():
+    item = input('Add item: ')
+    add_item(item)
+    save_user_info()
