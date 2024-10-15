@@ -8,3 +8,7 @@ lagring
         lägga till
         ta bort
     en fil för varje användare
+
+Förbättra:
+    Printa om listan är tom
+    Radera tomma filer
