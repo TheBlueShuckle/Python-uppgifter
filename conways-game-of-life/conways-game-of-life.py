@@ -1,7 +1,6 @@
 import pygame
 from tile import Tile
 from grid import Grid
-from cursor import *
 
 screen = pygame.display.set_mode((800,800))
 clock = pygame.time.Clock()
@@ -9,7 +8,7 @@ running = True
 
 tiles = []
 alive_color = 'white'
-bg_color = 'black'
+dead_color  = 'black'
 hover_color = 'gray'
 
 def draw_grid(tiles):
@@ -33,6 +32,8 @@ def hover(mouse_x, mouse_y):
 def dehover(hovered_tile, prev_color):
     hovered_tile.color = prev_color
 
+# // PYGAME START //
+
 pygame.init()
 
 grid = Grid(100, 100, 8)
@@ -47,20 +48,13 @@ while running:
     # fill the screen with a color to wipe away anything from last frame
     screen.fill(bg_color)
 
-    #mousex, mousey = pygame.mouse.get_pos()
-    #for tile in grid.tiles:
-    #    if tile.x <= mousex and tile.x + tile.size >= mousex:
-    #        if tile.y <= mousey and tile.y + tile.size >= mousey:
-    #            temp_color = tile.color
-    #            hovered_tile = tile
-    #            tile.color = hover_color
-    #            break
     mouse_x, mouse_y = get_cursor_pos()
     hovered_tile, prev_color = hover(mouse_x, mouse_y)
     draw_grid(grid.tiles)
-    # flip() the display to put your work on screen
+
     pygame.display.flip()
     dehover(hovered_tile, prev_color)
+
     clock.tick(30)  # limits FPS to 30
 
 pygame.quit()
