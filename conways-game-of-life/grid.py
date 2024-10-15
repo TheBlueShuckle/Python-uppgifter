@@ -14,4 +14,5 @@ class Grid:
         for y in range(self.pixels_y):
             for x in range(self.pixels_x):
                 neighbors = []
-                
+
+                tile.find_neighbors(neighbors)
