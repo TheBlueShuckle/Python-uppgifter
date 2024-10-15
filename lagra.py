@@ -2,7 +2,8 @@ import os
 
 users = {
     "Foo" : "Bar",
-    "FooBar" : "Baz" 
+    "FooBar" : "Baz",
+    "Didrik" : "Ville"
 }
 
 user_items = []
