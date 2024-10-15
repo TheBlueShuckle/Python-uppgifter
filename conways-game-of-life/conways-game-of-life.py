@@ -46,7 +46,7 @@ while running:
             running = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill(bg_color)
+    screen.fill('black')
 
     mouse_x, mouse_y = get_cursor_pos()
     hovered_tile, prev_color = hover(mouse_x, mouse_y)
