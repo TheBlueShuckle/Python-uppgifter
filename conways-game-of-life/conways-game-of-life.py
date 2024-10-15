@@ -9,7 +9,7 @@ running = True
 tiles = []
 alive_color = 'White'
 bg_color = 'Black'
-hover_color = 'Grey'
+hover_color = 'Gray'
 
 def draw_grid(tiles):
     for tile in tiles:
@@ -32,10 +32,10 @@ while running:
     # fill the screen with a color to wipe away anything from last frame
     screen.fill(bg_color)
 
-    mousex, mousey = pygame.mouse.get_pos()
+    mouse_pos = pygame.mouse.get_pos
     for n in tiles:
-        if tiles[n].x == mousex:
-            if tiles[n].y == mousey:
+        if tiles[n].x == mouse_pos[0]:
+            if tiles[n].y == mouse_pos[1]:
                 tiles[n].hover = True
                 break
             break
