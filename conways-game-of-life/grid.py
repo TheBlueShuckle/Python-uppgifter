@@ -8,7 +8,7 @@ class Grid:
         self.pixels_y = tiles_y
         self.tile_size = pixel_size
 
-        self.tiles = [[Tile(x, y, pixel_size, False, False) for x in range(tiles_x) for y in range(tiles_y)]]
+        self.tiles = [[Tile(x, y, pixel_size, False, False) for x in range(tiles_x)] for y in range(tiles_y)]
 
     def set_neighbors(self, tile):
         for y in range(self.pixels_y):
