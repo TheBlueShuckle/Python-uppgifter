@@ -9,15 +9,15 @@ running = True
 tiles = []
 
 def parse_color(tile):
-    if tile.hover:
+    if tile.isHovered:
         return 'gray'
-    elif tile.alive:
+    elif tile.isAlive:
         return 'white'
     else:
         return 'black'
 
 def draw_grid(tiles):
-    for row in grid.tiles:
+    for row in tiles:
         for tile in row:
             pygame.draw.rect(screen, parse_color(tile), (tile.x, tile.y, tile.size, tile.size))
 
@@ -29,11 +29,11 @@ def get_cursor_pos():
 def hover(mouse_x, mouse_y):
     tile = grid.tiles[min(round(mouse_y / 8), 99)][min(round(mouse_x / 8), 99)]
     hovered_tile = tile
-    tile.hover = True
+    tile.isHovered = True
     return(hovered_tile)
 
 def dehover(hovered_tile):
-    hovered_tile.hover = False
+    hovered_tile.isHovered = False
 
 # // PYGAME START //
 
@@ -53,7 +53,7 @@ while running:
 
     mouse_x, mouse_y = get_cursor_pos()
     hovered_tile = hover(mouse_x, mouse_y)
-    draw_grid(grid.tiles)
+    draw_grid(grid.tiles) # Passing in grid.tiles because its more efficient (dont cite me) -V
 
     pygame.display.flip()
     dehover(hovered_tile)
