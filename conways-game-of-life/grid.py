@@ -21,7 +21,9 @@ class Grid:
         neighbors = []
 
         for pos in range(8):
-            if (not (tile.raw_x + x_offsets[pos] < 0) or not (tile.raw_x + x_offsets[pos] > max_x)) and (not (tile.raw_y + y_offsets[pos] < 0) or not (tile.raw_y + y_offsets[pos] > max_y)):
+            hasValidNeighbor = (not (tile.raw_x + x_offsets[pos] < 0) and not (tile.raw_x + x_offsets[pos] > max_x)) and (not (tile.raw_y + y_offsets[pos] < 0) and not (tile.raw_y + y_offsets[pos] > max_y))
+
+            if hasValidNeighbor:
                 neighbors.append(self.tiles[tile.raw_x + x_offsets[pos]][tile.raw_y + y_offsets[pos]])
 
         return neighbors
@@ -31,20 +33,20 @@ class Grid:
             for x in range(self.pixels_x):
                 self.tiles[x][y].neighbors = self.get_neighbors(self.tiles[x][y])
 
-grid = Grid(100, 100, 8)
+# grid = Grid(100, 100, 8)
 
+# # Test default
+# for neighbor in grid.get_neighbors(grid.tiles[10][10]):
+#     print(str(neighbor.x) + " " + str(neighbor.y))
 
-for neighbor in grid.get_neighbors(grid.tiles[10][10]):
-    print(str(neighbor.x) + " " + str(neighbor.y))
+# print("---")
+# # Test corner
+# for neighbor in grid.get_neighbors(grid.tiles[0][0]):
+#     print(str(neighbor.x) + " " + str(neighbor.y))
 
-print("---")
-# Test corner
-for neighbor in grid.get_neighbors(grid.tiles[0][0]):
-    print(str(neighbor.x) + " " + str(neighbor.y))
-
-print("---")
-# Test edge
-for neighbor in grid.get_neighbors(grid.tiles[1][0]):
-    print(str(neighbor.x) + " " + str(neighbor.y))
+# print("---")
+# # Test edge
+# for neighbor in grid.get_neighbors(grid.tiles[1][0]):
+#     print(str(neighbor.x) + " " + str(neighbor.y))
     
-print("---")
+# print("---")
