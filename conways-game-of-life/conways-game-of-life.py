@@ -40,6 +40,7 @@ def dehover(hovered_tile):
 pygame.init()
 
 grid = Grid(100, 100, 8)
+pygame.mouse.set_visible(False) # No more mouse-centering problems if you can't see the mouse -C
 
 while running:
     # poll for events
@@ -58,6 +59,6 @@ while running:
     pygame.display.flip()
     dehover(hovered_tile)
 
-    clock.tick(30)  # limits FPS to 30
+    clock.tick(60)  # limits FPS to 60
 
 pygame.quit()
