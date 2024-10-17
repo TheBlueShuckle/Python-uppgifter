@@ -7,6 +7,7 @@ def input_alive_tiles():
     is_done = False
     
     while not is_done:
+        display_grid(grid)
         coordinate = input('Input coordinates (eg. \'1 2\' for the positoin (1, 2)): ')
 
         if (coordinate != 'done'):
@@ -58,4 +59,5 @@ def start_sim(grid):
         if i == 'q':
             break
 
-display_grid(grid)
+input_alive_tiles()
+start_sim()
