@@ -17,3 +17,21 @@ class Tile:
 
     def set_neighbors(self, neighbors):
         self.neighbors = neighbors
+
+    def check_alive(self):
+        alive_neighbors = self.count_alive_neighbors(self.neighbors)
+
+        if (alive_neighbors < 2 or alive_neighbors > 3):
+            self.isAlive = False
+
+        if (not self.isAlive and alive_neighbors == 3):
+            self.isAlive = True
+
+    def count_alive_neighbors(neighbors):
+        alive_neighbors = 0
+
+        for neighbor in neighbors:
+            if neighbor.isAlive:
+                alive_neighbors += 1
+        
+        return alive_neighbors
