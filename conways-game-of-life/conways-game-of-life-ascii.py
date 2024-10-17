@@ -18,4 +18,14 @@ def display_grid(grid):
                     raw_print('  ')
         raw_print('\n')
 
+def start_sim(grid):
+    print('Press ENTER to iterate')
+    print('Type "q" to exit the program')
+    while True:
+        display_grid(grid)
+        simulation()
+        i = input('> ')
+        if i == 'q':
+            break
+
 display_grid(grid)
