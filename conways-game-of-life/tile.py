@@ -18,7 +18,7 @@ class Tile:
     def set_neighbors(self, neighbors):
         self.neighbors = neighbors
 
-    def check_alive(self):
+    def determine_status(self):
         alive_neighbors = self.count_alive_neighbors(self.neighbors)
 
         if (alive_neighbors < 2 or alive_neighbors > 3):
