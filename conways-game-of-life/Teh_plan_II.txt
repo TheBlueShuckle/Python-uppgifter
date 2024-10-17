@@ -1,0 +1,4 @@
+Ascii:
+    Input all alive cells
+    Display grid
+    

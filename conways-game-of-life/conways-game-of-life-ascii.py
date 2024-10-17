@@ -44,7 +44,7 @@ def display_grid(grid):
         for cell in row:
             match cell.isAlive:
                 case True:
-                    raw_print('# ')
+                    raw_print(' #')
                 case False:
                     raw_print('  ')
         raw_print('\n')
