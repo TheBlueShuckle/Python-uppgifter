@@ -18,7 +18,7 @@ class Grid:
         neighbors = []
 
         for pos in range(8):
-            hasValidNeighbor = (not (tile.raw_x + x_offsets[pos] < 0) and not (tile.raw_x + x_offsets[pos] > self.tiles_x - 1)) and (not (tile.raw_y + y_offsets[pos] < 0) and not (tile.raw_y + y_offsets[pos] > self.tiles_y - 1))
+            hasValidNeighbor = not (tile.raw_x + x_offsets[pos] < 0) and not tile.raw_x + x_offsets[pos] > self.tiles_x - 1 and not tile.raw_y + y_offsets[pos] < 0 and not (tile.raw_y + y_offsets[pos] > self.tiles_y - 1)
 
             if hasValidNeighbor:
                 neighbors.append(self.tiles[tile.raw_x + x_offsets[pos]][tile.raw_y + y_offsets[pos]])
