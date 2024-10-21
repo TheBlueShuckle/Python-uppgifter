@@ -8,10 +8,47 @@ running = True
 
 tiles = []
 
+def find_focus_tiles(grid):
+    focus_tiles = []
+
+    for y in range(grid.tiles_y):
+        for x in range(grid.tiles_x):
+            tile = grid.tiles[x][y]
+            
+            if (tile.is_alive):
+                focus_tiles.append(tile)
+                for neighbor in tile.neighbors:
+                    if neighbor not in focus_tiles and not neighbor.is_alive:
+                        focus_tiles.append(neighbor)
+
+    return focus_tiles
+
+def simulation(grid):
+    focus_tiles = find_focus_tiles(grid)
+
+    to_flip = []
+    for tile in focus_tiles:
+        # print(str(tile.x) + ', ' + str(tile.y))
+
+        # for neighbor in tile.neighbors:
+        #     print(str(neighbor.x) + ', ' + str(neighbor.y))
+
+        # print(tile.is_alive)
+        # print(tile.determine_status())
+        # print('----')
+        if tile.is_alive != tile.determine_status():
+            to_flip.append(tile)
+                
+    the_flippening(to_flip)
+
+def the_flippening(to_flip):
+    for tile in to_flip:
+        tile.flip()
+
 def parse_color(tile):
-    if tile.isHovered:
+    if tile.is_hovered:
         return 'gray'
-    elif tile.isAlive:
+    elif tile.is_alive:
         return 'white'
     else:
         return 'black'
@@ -33,7 +70,7 @@ def hover(mouse_x, mouse_y):
     return(hovered_tile)
 
 def dehover(hovered_tile):
-    hovered_tile.isHovered = False
+    hovered_tile.is_hovered = False
 
 # // PYGAME START //
 
@@ -51,7 +88,7 @@ while running:
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill('black')
-
+    
     mouse_x, mouse_y = get_cursor_pos()
     hovered_tile = hover(mouse_x, mouse_y)
     draw_grid(grid.tiles) # Passing in grid.tiles because its more efficient (dont cite me) -V
