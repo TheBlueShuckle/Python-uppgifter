@@ -2,8 +2,8 @@ class Tile:
     neighbors = []
     raw_x = 0
     raw_y = 0
-    isHovered = False #bool
-    isAlive = False #bool
+    is_hovered = False #bool
+    is_alive = False #bool
 
     def __init__(self, x, y, size):
         # Dont like these vars :/ -V
@@ -22,10 +22,10 @@ class Tile:
         alive_neighbors = self.count_alive_neighbors(self.neighbors)
 
         if (alive_neighbors < 2 or alive_neighbors > 3):
-            self.isAlive = False
+            return False
 
-        if (not self.isAlive and alive_neighbors == 3):
-            self.isAlive = True
+        if (not self.is_alive and alive_neighbors == 3):
+            return True
 
     def count_alive_neighbors(neighbors):
         alive_neighbors = 0
