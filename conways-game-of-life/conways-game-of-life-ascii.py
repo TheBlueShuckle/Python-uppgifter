@@ -2,6 +2,23 @@ from tile import Tile
 from grid import Grid
 
 grid = Grid(10, 10, 0)
+focus_tiles = []
+
+def find_focus_tiles(grid):
+    focus_tiles = []
+
+    for y in range(grid.tiles_y):
+        for x in range(grid.tiles_x):
+            tile = grid.tiles[x][y]
+            
+            if (tile.is_alive):
+                focus_tiles.append(tile)
+
+            for neighbor in tile.neighbors:
+                if neighbor not in focus_tiles and not neighbor.is_alive:
+                    focus_tiles.append(neighbor)
+    
+    return focus_tiles
 
 def input_alive_tiles():
     is_done = False
@@ -26,12 +43,17 @@ def input_alive_tiles():
         else:
             is_done = True
 
-def simulation(focus_tiles):
+    focus_tiles = find_focus_tiles(grid)    
+
+def simulation():
+    global focus_tiles
     to_flip = []
     for tile in focus_tiles:
         if tile.is_alive != tile.determine_status:
             to_flip.append(tile)
     the_flippening(to_flip)
+
+    focus_tiles = find_focus_tiles(grid)
 
 def the_flippening(to_flip):
     for tile in to_flip:
@@ -52,7 +74,7 @@ def display_grid(grid):
     for row in grid.tiles:
         raw_print(grid.tiles.index(row))
         for cell in row:
-            match cell.isAlive:
+            match cell.is_alive:
                 case True:
                     raw_print(' #')
                 case False:
@@ -71,15 +93,4 @@ def start_sim(grid):
             break
 
 input_alive_tiles()
-start_sim()
-
-def find_focus_tiles(grid):
-    focus_tiles = []
-
-    for tile in grid.tiles:
-        if (tile.is_alive and tile not in focus_tiles):
-            focus_tiles.append(tile)
-
-            for neighbor in tile.neighbors:
-                if neighbor.is_alive and neighbor not in focus_tiles:
-                    focus_tiles.append(neighbor)
+start_sim(grid)
