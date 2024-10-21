@@ -29,7 +29,7 @@ def get_cursor_pos():
 def hover(mouse_x, mouse_y):
     tile = grid.tiles[min(round(mouse_y / 8), 99)][min(round(mouse_x / 8), 99)]
     hovered_tile = tile
-    tile.isHovered = True
+    tile.is_hovered = True
     return(hovered_tile)
 
 def dehover(hovered_tile):

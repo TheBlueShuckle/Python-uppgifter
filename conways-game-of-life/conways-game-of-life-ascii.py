@@ -18,7 +18,7 @@ def input_alive_tiles():
 
             if check_if_valid_coordinate(grid, parsed_coordinate):
                 tile = grid.tiles[parsed_coordinate[1]][parsed_coordinate[0]]
-                tile.isAlive = not tile.isAlive # Toggles bool -V
+                tile.is_alive = not tile.is_alive # Toggles bool -V
 
             else:
                 print('Incorrect input, retry.')
@@ -72,3 +72,14 @@ def start_sim(grid):
 
 input_alive_tiles()
 start_sim()
+
+def find_focus_tiles(grid):
+    focus_tiles = []
+
+    for tile in grid.tiles:
+        if (tile.is_alive and tile not in focus_tiles):
+            focus_tiles.append(tile)
+
+            for neighbor in tile.neighbors:
+                if neighbor.is_alive and neighbor not in focus_tiles:
+                    focus_tiles.append(neighbor)
