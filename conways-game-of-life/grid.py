@@ -29,27 +29,3 @@ class Grid:
         for y in range(self.tiles_x):
             for x in range(self.tiles_y):
                 self.tiles[x][y].neighbors = self.get_neighbors(self.tiles[x][y])
-
-grid = Grid(100, 100, 8)
-
-# # Test default
-# for neighbor in grid.get_neighbors(grid.tiles[10][10]):
-#     print(str(neighbor.x) + " " + str(neighbor.y))
-
-# print("---")
-# # Test corner
-# for neighbor in grid.get_neighbors(grid.tiles[0][0]):
-#     print(str(neighbor.x) + " " + str(neighbor.y))
-
-# print("---")
-# # Test edge
-# for neighbor in grid.get_neighbors(grid.tiles[1][0]):
-#     print(str(neighbor.x) + " " + str(neighbor.y))
-    
-# print("---")
-
-# Test Thingy
-# for neighbor in grid.get_neighbors(grid.tiles[99][99]):
-#     print(str(neighbor.x) + " " + str(neighbor.y))
-    
-# print("---")
