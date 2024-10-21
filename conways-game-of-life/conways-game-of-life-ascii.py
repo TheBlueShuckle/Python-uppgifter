@@ -1,8 +1,7 @@
 from tile import Tile
 from grid import Grid
 
-grid = Grid(10, 10, 0)
-focus_tiles = []
+grid = Grid(10, 10, 1)
 
 def find_focus_tiles(grid):
     focus_tiles = []
@@ -13,11 +12,10 @@ def find_focus_tiles(grid):
             
             if (tile.is_alive):
                 focus_tiles.append(tile)
+                for neighbor in tile.neighbors:
+                    if neighbor not in focus_tiles and not neighbor.is_alive:
+                        focus_tiles.append(neighbor)
 
-            for neighbor in tile.neighbors:
-                if neighbor not in focus_tiles and not neighbor.is_alive:
-                    focus_tiles.append(neighbor)
-    
     return focus_tiles
 
 def input_alive_tiles():
@@ -41,23 +39,29 @@ def input_alive_tiles():
                 print('Incorrect input, retry.')
 
         else:
-            is_done = True
+            is_done = True   
 
-    focus_tiles = find_focus_tiles(grid)    
+def simulation(grid):
+    focus_tiles = find_focus_tiles(grid)
 
-def simulation():
-    global focus_tiles
     to_flip = []
     for tile in focus_tiles:
-        if tile.is_alive != tile.determine_status:
-            to_flip.append(tile)
-    the_flippening(to_flip)
+        # print(str(tile.x) + ', ' + str(tile.y))
 
-    focus_tiles = find_focus_tiles(grid)
+        # for neighbor in tile.neighbors:
+        #     print(str(neighbor.x) + ', ' + str(neighbor.y))
+
+        # print(tile.is_alive)
+        # print(tile.determine_status())
+        # print('----')
+        if tile.is_alive != tile.determine_status():
+            to_flip.append(tile)
+                
+    the_flippening(to_flip)
 
 def the_flippening(to_flip):
     for tile in to_flip:
-        tile.flip
+        tile.flip()
 
 def check_if_valid_coordinate(grid, coordinate):
     if (len(coordinate) == 2):
@@ -87,7 +91,7 @@ def start_sim(grid):
 
     while True:
         display_grid(grid)
-        simulation()
+        simulation(grid)
         i = input('> ')
         if i == 'q':
             break

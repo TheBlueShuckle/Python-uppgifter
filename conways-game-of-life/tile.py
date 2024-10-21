@@ -19,22 +19,38 @@ class Tile:
         self.neighbors = neighbors
 
     def flip(self):
-        self.isAlive = not self.isAlive
+        self.is_alive = not self.is_alive
 
     def determine_status(self):
-        alive_neighbors = self.count_alive_neighbors(self.neighbors)
+        alive_neighbors = self.count_alive_neighbors()
 
-        if (alive_neighbors < 2 or alive_neighbors > 3):
+        if (self.is_alive and alive_neighbors < 2):
             return False
-
+        
+        if (self.is_alive and (alive_neighbors == 2 or alive_neighbors == 3)):
+            return True
+        
+        if (self.is_alive and alive_neighbors > 3):
+            return False
+        
         if (not self.is_alive and alive_neighbors == 3):
             return True
+        
+        return False
 
-    def count_alive_neighbors(neighbors):
+        # if (alive_neighbors < 2 or alive_neighbors > 3):
+        #     return False
+
+        # elif alive_neighbors == 3:
+        #     return True
+        
+        # return self.is_alive
+
+    def count_alive_neighbors(self):
         alive_neighbors = 0
 
-        for neighbor in neighbors:
-            if neighbor.isAlive:
+        for neighbor in self.neighbors:
+            if neighbor.is_alive:
                 alive_neighbors += 1
         
         return alive_neighbors
