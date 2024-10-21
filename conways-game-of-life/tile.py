@@ -18,6 +18,9 @@ class Tile:
     def set_neighbors(self, neighbors):
         self.neighbors = neighbors
 
+    def flip(self):
+        self.isAlive = not self.isAlive
+
     def determine_status(self):
         alive_neighbors = self.count_alive_neighbors(self.neighbors)
 

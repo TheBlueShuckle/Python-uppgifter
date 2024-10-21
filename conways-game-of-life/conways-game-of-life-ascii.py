@@ -26,6 +26,16 @@ def input_alive_tiles():
         else:
             is_done = True
 
+def simulation(focus_tiles):
+    to_flip = []
+    for tile in focus_tiles:
+        if tile.is_alive != tile.determine_status:
+            to_flip.append(tile)
+    the_flippening(to_flip)
+
+def the_flippening(to_flip):
+    for tile in to_flip:
+        tile.flip
 
 def check_if_valid_coordinate(grid, coordinate):
     if (len(coordinate) == 2):
@@ -52,6 +62,7 @@ def display_grid(grid):
 def start_sim(grid):
     print('Press ENTER to iterate')
     print('Type "q" to exit the program')
+
     while True:
         display_grid(grid)
         simulation()
