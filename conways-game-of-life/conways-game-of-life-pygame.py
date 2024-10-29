@@ -28,14 +28,6 @@ def simulation(grid):
 
     to_flip = []
     for tile in focus_tiles:
-        # print(str(tile.x) + ', ' + str(tile.y))
-
-        # for neighbor in tile.neighbors:
-        #     print(str(neighbor.x) + ', ' + str(neighbor.y))
-
-        # print(tile.is_alive)
-        # print(tile.determine_status())
-        # print('----')
         if tile.is_alive != tile.determine_status():
             to_flip.append(tile)
                 

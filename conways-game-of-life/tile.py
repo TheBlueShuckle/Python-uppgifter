@@ -24,27 +24,13 @@ class Tile:
     def determine_status(self):
         alive_neighbors = self.count_alive_neighbors()
 
-        if (self.is_alive and alive_neighbors < 2):
+        if (alive_neighbors < 2 or alive_neighbors > 3):
             return False
-        
-        if (self.is_alive and (alive_neighbors == 2 or alive_neighbors == 3)):
+
+        elif alive_neighbors == 3:
             return True
         
-        if (self.is_alive and alive_neighbors > 3):
-            return False
-        
-        if (not self.is_alive and alive_neighbors == 3):
-            return True
-        
-        return False
-
-        # if (alive_neighbors < 2 or alive_neighbors > 3):
-        #     return False
-
-        # elif alive_neighbors == 3:
-        #     return True
-        
-        # return self.is_alive
+        return self.is_alive
 
     def count_alive_neighbors(self):
         alive_neighbors = 0
