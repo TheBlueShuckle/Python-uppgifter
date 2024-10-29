@@ -9,7 +9,7 @@ class Grid:
         self.tiles = [[Tile(x, y, tile_size) for x in range(tiles_x)] for y in range(tiles_y)]
         self.set_neighbors()
 
-    def get_neighbors(self, tile): #SUSSY BAKA
+    def get_neighbors(self, tile):
         #              (-1,-1), (0,-1), (1,-1)
         #              (-1, 0), (0, 0), (1, 0)
         #              (-1, 1), (0, 1), (1, 1)
